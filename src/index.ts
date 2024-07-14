@@ -2,6 +2,7 @@
 import express from 'express';
 import router from './router' ;
 import config from "config";
+require("../config/database.ts")
 
 const app = express();
 

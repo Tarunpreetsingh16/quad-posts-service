@@ -3,6 +3,6 @@ import mongoose from "mongoose";
 
 const db: string = config.get('mongoURI');
 
-mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true } as mongoose.ConnectOptions)
+mongoose.connect(db)
     .then(() => console.log("MongoDB connected..."))
     .catch(error => console.error(error))

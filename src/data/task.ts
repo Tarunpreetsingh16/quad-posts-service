@@ -1,5 +1,5 @@
 export class Task {
-    id: Number;
+    id: number;
     title: string;
     description: string;
     date: Date;
@@ -7,7 +7,7 @@ export class Task {
     yAxisPriority: string;
     deleted?: boolean
 
-    constructor(id: Number, title: string, description: string, date: Date, xAxisPriority: string, yAxisPriority: string, deleted?: boolean) {
+    constructor(id: number, title: string, description: string, date: Date, xAxisPriority: string, yAxisPriority: string, deleted?: boolean) {
         this.id = id
         this.title = title;
         this.description = description;
