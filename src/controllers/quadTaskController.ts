@@ -25,7 +25,7 @@ const addTask = async (req: Request, res: Response) => {
             task: newTask
         });
     } catch (e: any) {
-        console.error(e)
+        console.error("AddTask(): Error =", e.message)
     }
 }      
 
