@@ -1,33 +1,34 @@
 import { Request, Response } from "express";
 import { Task } from "../data/task";
-import { QuadrantTask } from "../models/quadrantTask";
+import { quadTaskServiceAddTask, quadTaskServiceGetTasks } from "../service/quadTaskService";
+
 
 const addTask = async (req: Request, res: Response) => {
     const task: Task = req.body;
     try {
-
-        const tasks = await QuadrantTask.find();
-        const newTask = new QuadrantTask(task);
-
-        if (!tasks) {
-            newTask.id = 0;
-        } else {
-            const maxIndex = tasks.reduce((maxTillNow: number, task: Task) => {
-                return Math.max(maxTillNow, task.id)
-            }, 0)
-            newTask.id = maxIndex + 1
-        }
-        
-        await newTask.save();
-
-        res.json({
-            message: 'Task added successfully',
-            task: newTask
-        });
+        res.json(await quadTaskServiceAddTask(task));
     } catch (e: any) {
-        console.error("AddTask(): Error =", e.message)
+        res.status(500).json({
+            "title": "Failed to add a task",
+            "titleKey": "error.failed.add.task",
+            "timestamp": new Date().toISOString(),
+            "errors": [] 
+        })
+    }
+} 
+
+const getTasks = async (req: Request, res: Response) => {
+    try {
+        res.json(await quadTaskServiceGetTasks());
+    } catch (e: any) {
+        res.status(500).json({
+            "title": "Failed to get tasks",
+            "titleKey": "error.failed.get.tasks",
+            "timestamp": new Date().toISOString(),
+            "errors": [] 
+        })
     }
 }      
 
-export { addTask };
+export { addTask, getTasks };
   
